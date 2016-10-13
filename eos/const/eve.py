@@ -33,7 +33,7 @@ class Attribute(IntEnum):
 
     # This is a static mapping of data from dmgattribs
     # if attribs are added/updated, this will have to be manually changed
-    
+
     mass = 4
     hp = 9
     power_output = 11
@@ -105,7 +105,7 @@ class Attribute(IntEnum):
     required_skill_5 = 1289
     required_skill_6 = 1290
 
-    #Ship Groups
+    # Ship Groups
     can_fit_ship_group_1 = 1298
     can_fit_ship_group_2 = 1299
     can_fit_ship_group_3 = 1300
@@ -117,7 +117,7 @@ class Attribute(IntEnum):
     can_fit_ship_group_9 = 2065
     can_fit_ship_group_10 = 2396
 
-    #Ship Types
+    # Ship Types
     can_fit_ship_type_1 = 1302
     can_fit_ship_type_2 = 1303
     can_fit_ship_type_3 = 1304

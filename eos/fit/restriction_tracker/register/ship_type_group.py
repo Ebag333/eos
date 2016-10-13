@@ -36,7 +36,7 @@ TYPE_RESTRICTION_ATTRS = (
     Attribute.can_fit_ship_type_5,
     Attribute.can_fit_ship_type_6,
     Attribute.can_fit_ship_type_7,
-    Attribute.fits_to_shiptype
+    Attribute.fits_to_shiptype,
 )
 GROUP_RESTRICTION_ATTRS = (
     Attribute.can_fit_ship_group_1,
@@ -48,7 +48,7 @@ GROUP_RESTRICTION_ATTRS = (
     Attribute.can_fit_ship_group_7,
     Attribute.can_fit_ship_group_8,
     Attribute.can_fit_ship_group_9,
-    Attribute.can_fit_ship_group_10
+    Attribute.can_fit_ship_group_10,
 )
 
 
