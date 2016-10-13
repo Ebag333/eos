@@ -180,7 +180,7 @@ class Category(IntEnum):
     implant = 20
     subsystem = 32
     structure = 65
-    structureModules = 66
+    structureModule = 66
 
 
 @unique
