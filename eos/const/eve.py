@@ -135,6 +135,7 @@ class Attribute(IntEnum):
     allowed_drone_group_2 = 1783
     reload_time = 1795
 
+
 @unique
 class Type(IntEnum):
     """Item ID holder"""
