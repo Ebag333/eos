@@ -135,8 +135,6 @@ class Attribute(IntEnum):
     allowed_drone_group_2 = 1783
     reload_time = 1795
 
-
-
 @unique
 class Type(IntEnum):
     """Item ID holder"""
@@ -169,13 +167,19 @@ class Group(IntEnum):
 @unique
 class Category(IntEnum):
     """Category ID holder"""
+
+    # Mapping from invcategories
+
     ship = 6
     module = 7
     charge = 8
     skill = 16
     drone = 18
+    fighter = 87
     implant = 20
     subsystem = 32
+    structure = 65
+    structureModules = 66
 
 
 @unique
