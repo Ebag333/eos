@@ -78,7 +78,11 @@ class CapitalItemRegister(RestrictionRegister):
         except AttributeError:
             pass
         else:
-            if Type.capital_ships in ship_item.required_skills:
+            if ship_item.required_skills:
+                if (Type.capital_ships in ship_item.required_skills):
+                    return
+            else:
+                # There are no skills attached to the item, so return without error
                 return
         # If we got here, then we're dealing with non-capital
         # ship, and all registered holders are tainted
