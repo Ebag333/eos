@@ -159,8 +159,11 @@ class Category(IntEnum):
     charge = 8
     skill = 16
     drone = 18
+    fighter = 87
     implant = 20
     subsystem = 32
+    structure = 65
+    structureModules = 66
 
 
 @unique
