@@ -30,6 +30,10 @@ from enum import IntEnum, unique
 @unique
 class Attribute(IntEnum):
     """Attribute ID holder"""
+
+    # This is a static mapping of data from dmgattribs
+    # if attribs are added/updated, this will have to be manually changed
+    
     mass = 4
     hp = 9
     power_output = 11
@@ -100,14 +104,28 @@ class Attribute(IntEnum):
     required_skill_6_level = 1288
     required_skill_5 = 1289
     required_skill_6 = 1290
+
+    #Ship Groups
     can_fit_ship_group_1 = 1298
     can_fit_ship_group_2 = 1299
     can_fit_ship_group_3 = 1300
     can_fit_ship_group_4 = 1301
+    can_fit_ship_group_5 = 1872
+    can_fit_ship_group_6 = 1879
+    can_fit_ship_group_7 = 1880
+    can_fit_ship_group_8 = 1881
+    can_fit_ship_group_9 = 2065
+    can_fit_ship_group_10 = 2396
+
+    #Ship Types
     can_fit_ship_type_1 = 1302
     can_fit_ship_type_2 = 1303
     can_fit_ship_type_3 = 1304
     can_fit_ship_type_4 = 1305
+    can_fit_ship_type_5 = 1944
+    can_fit_ship_type_6 = 2103
+    can_fit_ship_type_7 = 2463
+
     subsystem_slot = 1366
     max_subsystems = 1367
     fits_to_shiptype = 1380
@@ -116,10 +134,7 @@ class Attribute(IntEnum):
     allowed_drone_group_1 = 1782
     allowed_drone_group_2 = 1783
     reload_time = 1795
-    can_fit_ship_group_5 = 1872
-    can_fit_ship_group_6 = 1879
-    can_fit_ship_group_7 = 1880
-    can_fit_ship_group_8 = 1881
+
 
 
 @unique
