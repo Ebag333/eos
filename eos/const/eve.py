@@ -115,6 +115,7 @@ class Attribute(IntEnum):
     rig_size = 1547
     allowed_drone_group_1 = 1782
     allowed_drone_group_2 = 1783
+    is_capital_size = 1785
     reload_time = 1795
     can_fit_ship_group_5 = 1872
     can_fit_ship_group_6 = 1879
