@@ -30,17 +30,17 @@ from .abc import RestrictionRegister
 # Capital items are exactly 4000 or 8000 in size
 # with the exception of a few officer modules
 # (which this validation will not catch)
-CapitalItemVolumeSize = [4000, 8000]
+Minimum_Capital_Item_Volume_Size = 4000
 
-
-CapitalItemErrorData = namedtuple('CapitalItemErrorData', ('holder_volume', 'capital_item_volumes'))
+CapitalItemErrorData = namedtuple('CapitalItemErrorData', ('holder_volume', 'minimum_capital_item_volume', 'ship_is_capital'))
 
 
 class CapitalItemRegister(RestrictionRegister):
     """
     Implements restriction:
-    To fit holders with volume bigger than 500, ship must
-    have Capital Ships skill requirement.
+    To fit holders with volume bigger than
+    Minimum_Capital_Item_Volume_Size,
+    ship must have Capital Ships attribute.
 
     Details:
     Only holders belonging to ship are tracked.
@@ -63,7 +63,7 @@ class CapitalItemRegister(RestrictionRegister):
             holder_volume = holder.item.attributes[Attribute.volume]
         except KeyError:
             return
-        if holder_volume not in CapitalItemVolumeSize:
+        if holder_volume < Minimum_Capital_Item_Volume_Size:
             return
         self.__capital_holders.add(holder)
 
@@ -75,18 +75,18 @@ class CapitalItemRegister(RestrictionRegister):
         ship_holder = self._fit.ship
         try:
             ship_item = ship_holder.item
+            try:
+                if ship_item.attributes[Attribute.is_capital_size]:
+                    # Skip validation if ship is flagged as a capital
+                    # Capital modules are allowed
+                    return
+            except KeyError:
+                # Attribute doesn't exist,
+                # so not a capital
+                pass
         except AttributeError:
+            # Ship doesn't exist on the fit.
             pass
-        else:
-            if not ship_item.required_skills:
-                # There are no skills attached to the ship
-                # Return without tainting the holder
-                return
-
-            if Type.capital_ships in ship_item.required_skills:
-                # Skip validation only if ship has capital
-                # ships requirement, else carry on
-                return
 
         # If we got here, then we're dealing with non-capital
         # ship, and all registered holders are tainted
@@ -96,7 +96,8 @@ class CapitalItemRegister(RestrictionRegister):
                 holder_volume = holder.item.attributes[Attribute.volume]
                 tainted_holders[holder] = CapitalItemErrorData(
                     holder_volume=holder_volume,
-                    capital_item_volumes=CapitalItemVolumeSize
+                    minimum_capital_item_volume=Minimum_Capital_Item_Volume_Size,
+                    ship_is_capital = "false"
                 )
             raise RegisterValidationError(tainted_holders)
 
