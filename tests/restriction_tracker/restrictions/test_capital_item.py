@@ -30,25 +30,25 @@ from tests.restriction_tracker.restriction_testcase import RestrictionTestCase
 class TestCapitalItem(RestrictionTestCase):
     """Check functionality of capital-sized modules restriction"""
 
-    def test_failNoShip(self):
+    def test_fail_NoShip(self):
         # Check that error is raised on attempt
         # to add capital item to fit w/o ship
-        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 501})
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 4000})
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.max_allowed_volume, 500)
-        self.assertEqual(restriction_error.holder_volume, 501)
+        self.assertEqual(restriction_error.minimum_capital_item_volume, 4000)
+        self.assertEqual(restriction_error.holder_volume, 4000)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
         self.assert_restriction_buffers_empty()
 
-    def test_fail_subcapital_ship(self):
+    def test_fail_subcapital_ship_4000(self):
         # Check that error is raised on attempt
         # to add capital item to fit with subcapital
         # ship
-        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 501})
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 4000})
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         self.track_holder(holder)
         ship_item = self.ch.type_(type_id=2)
@@ -56,8 +56,27 @@ class TestCapitalItem(RestrictionTestCase):
         self.set_ship(ship_holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.max_allowed_volume, 500)
-        self.assertEqual(restriction_error.holder_volume, 501)
+        self.assertEqual(restriction_error.minimum_capital_item_volume, 4000)
+        self.assertEqual(restriction_error.holder_volume, 4000)
+        self.untrack_holder(holder)
+        self.set_ship(None)
+        self.assertEqual(len(self.log), 0)
+        self.assert_restriction_buffers_empty()
+
+    def test_fail_subcapital_ship_8000(self):
+        # Check that error is raised on attempt
+        # to add capital item to fit with subcapital
+        # ship
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 8000})
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        self.track_holder(holder)
+        ship_item = self.ch.type_(type_id=2)
+        ship_holder = Mock(state=State.offline, item=ship_item, _domain=None, spec_set=Ship(1))
+        self.set_ship(ship_holder)
+        restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
+        self.assertIsNotNone(restriction_error)
+        self.assertEqual(restriction_error.minimum_capital_item_volume, 4000)
+        self.assertEqual(restriction_error.holder_volume, 8000)
         self.untrack_holder(holder)
         self.set_ship(None)
         self.assertEqual(len(self.log), 0)
@@ -65,7 +84,7 @@ class TestCapitalItem(RestrictionTestCase):
 
     def test_fail_original_volume(self):
         # Make sure original volume value is taken
-        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 501})
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 4000})
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         # Set volume below 500 to check that even when
         # modified attributes are available, raw attributes
@@ -73,12 +92,13 @@ class TestCapitalItem(RestrictionTestCase):
         holder.attributes = {Attribute.volume: 100}
         self.track_holder(holder)
         ship_item = self.ch.type_(type_id=2)
+        ship_item.required_skills = {ConstType.capital_ships: 1}
         ship_holder = Mock(state=State.offline, item=ship_item, _domain=None, spec_set=Ship(1))
         self.set_ship(ship_holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.max_allowed_volume, 500)
-        self.assertEqual(restriction_error.holder_volume, 501)
+        self.assertEqual(restriction_error.minimum_capital_item_volume, 4000)
+        self.assertEqual(restriction_error.holder_volume, 4000)
         self.untrack_holder(holder)
         self.set_ship(None)
         self.assertEqual(len(self.log), 0)
@@ -86,7 +106,7 @@ class TestCapitalItem(RestrictionTestCase):
 
     def test_pass_subcapital_ship_holder(self):
         # Make sure no error raised when non-capital
-        # item is added to fit
+        # item is added to a subcapital fit
         item = self.ch.type_(type_id=1, attributes={Attribute.volume: 500})
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         self.track_holder(holder)
@@ -99,7 +119,7 @@ class TestCapitalItem(RestrictionTestCase):
     def test_pass_non_ship_holder(self):
         # Check that non-ship holders are not affected
         # by restriction
-        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 501})
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 4000})
         holder = Mock(state=State.offline, item=item, _domain=None, spec_set=Ship(1))
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
@@ -111,11 +131,26 @@ class TestCapitalItem(RestrictionTestCase):
     def test_pass_capital_ship(self):
         # Check that capital holders can be added to
         # capital ship
-        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 501})
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 4000})
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         self.track_holder(holder)
-        ship_item = self.ch.type_(type_id=2)
-        ship_item.required_skills = {ConstType.capital_ships: 1}
+        ship_item = self.ch.type_(type_id=2, attributes={Attribute.is_capital_size: 1})
+        ship_holder = Mock(state=State.offline, item=ship_item, _domain=None, spec_set=Ship(1))
+        self.set_ship(ship_holder)
+        restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
+        self.assertIsNone(restriction_error)
+        self.untrack_holder(holder)
+        self.set_ship(None)
+        self.assertEqual(len(self.log), 0)
+        self.assert_restriction_buffers_empty()
+
+    def test_pass_capital_ship_subcap_module(self):
+        # Check that subcapital modules
+        # can be added to a capital ship
+        item = self.ch.type_(type_id=1, attributes={Attribute.volume: 400})
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        self.track_holder(holder)
+        ship_item = self.ch.type_(type_id=2, attributes={Attribute.is_capital_size: 1})
         ship_holder = Mock(state=State.offline, item=ship_item, _domain=None, spec_set=Ship(1))
         self.set_ship(ship_holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
@@ -131,6 +166,7 @@ class TestCapitalItem(RestrictionTestCase):
         holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
         self.track_holder(holder)
         ship_item = self.ch.type_(type_id=2)
+        ship_item.required_skills = {ConstType.capital_ships: 1}
         ship_holder = Mock(state=State.offline, item=ship_item, _domain=None, spec_set=Ship(1))
         self.set_ship(ship_holder)
         restriction_error = self.get_restriction_error(holder, Restriction.capital_item)
