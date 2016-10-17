@@ -66,7 +66,7 @@ class Cleaner:
             Category.subsystem,
             Category.fighter,
             Category.structure,
-            Category.structureModules
+            Category.structureModules,
         )
         # Set with groupIDs of items we want to keep
         # It is set because we will need to modify it
