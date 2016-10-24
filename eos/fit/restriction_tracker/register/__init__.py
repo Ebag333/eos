@@ -19,23 +19,6 @@
 # ===============================================================================
 
 
-from .charge_group import ChargeGroupRegister
-from .charge_size import ChargeSizeRegister
-from .charge_volume import ChargeVolumeRegister
-from .drone_group import DroneGroupRegister
-from .holder_class import HolderClassRegister
-from .max_group import MaxGroupFittedRegister, MaxGroupOnlineRegister, MaxGroupActiveRegister
-from .resource import CpuRegister, PowerGridRegister, CalibrationRegister, DroneBayVolumeRegister, \
-    DroneBandwidthRegister
-from .rig_size import RigSizeRegister
-from .ship_type_group import ShipTypeGroupRegister
-from .skill_requirement import SkillRequirementRegister
-from .slot_index import SubsystemIndexRegister, ImplantIndexRegister, BoosterIndexRegister
-from .slot_amount import HighSlotRegister, MediumSlotRegister, LowSlotRegister, RigSlotRegister, \
-    SubsystemSlotRegister, TurretSlotRegister, LauncherSlotRegister, LaunchedDroneRegister
-from .state import StateRegister
-
-
 __all__ = [
     'ChargeGroupRegister',
     'ChargeSizeRegister',
@@ -66,3 +49,20 @@ __all__ = [
     'LaunchedDroneRegister',
     'StateRegister'
 ]
+
+
+from .charge_group import ChargeGroupRegister
+from .charge_size import ChargeSizeRegister
+from .charge_volume import ChargeVolumeRegister
+from .drone_group import DroneGroupRegister
+from .holder_class import HolderClassRegister
+from .max_group import MaxGroupFittedRegister, MaxGroupOnlineRegister, MaxGroupActiveRegister
+from .resource import (CpuRegister, PowerGridRegister, CalibrationRegister, DroneBayVolumeRegister,
+    DroneBandwidthRegister)
+from .rig_size import RigSizeRegister
+from .ship_type_group import ShipTypeGroupRegister
+from .skill_requirement import SkillRequirementRegister
+from .slot_index import SubsystemIndexRegister, ImplantIndexRegister, BoosterIndexRegister
+from .slot_amount import (HighSlotRegister, MediumSlotRegister, LowSlotRegister, RigSlotRegister,
+    SubsystemSlotRegister, TurretSlotRegister, LauncherSlotRegister, LaunchedDroneRegister)
+from .state import StateRegister

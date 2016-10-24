@@ -25,7 +25,7 @@ import os.path
 from logging import getLogger
 from weakref import WeakValueDictionary
 
-from eos.data.cache_object import Attribute, Effect, Modifier, Type
+from eos.data.cache_object import *
 from eos.util.repr import make_repr_str
 from .abc import BaseCacheHandler
 from .exception import TypeFetchError, AttributeFetchError, EffectFetchError, ModifierFetchError
@@ -46,7 +46,7 @@ class JsonCacheHandler(BaseCacheHandler):
     """
 
     def __init__(self, cache_path):
-        self._cache_path = cache_path
+        self._cache_path = os.path.abspath(cache_path)
         # Initialize memory data cache
         self.__type_data_cache = {}
         self.__attribute_data_cache = {}
