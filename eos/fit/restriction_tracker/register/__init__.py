@@ -19,7 +19,6 @@
 # ===============================================================================
 
 
-from .capital_item import CapitalItemRegister
 from .charge_group import ChargeGroupRegister
 from .charge_size import ChargeSizeRegister
 from .charge_volume import ChargeVolumeRegister
