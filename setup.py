@@ -10,10 +10,10 @@ install_requires = [str(ir.req) for ir in parsed_reqs]
 
 
 setup(
-    name='Eos',
-    description='Eos is a fitting engine for for EVE Online.',
+    name='Eos-Forked',
+    description='Eos is a fitting engine for EVE Online.',
     version=__version__,
-    author='Pyfa Team',
+    author='Ebag333',
     author_email='',
     url='https://github.com/pyfa-org/eos',
     packages=find_packages(exclude='tests'),
