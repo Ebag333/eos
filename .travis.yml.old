@@ -1,0 +1,21 @@
+language: python
+python:
+  - '3.5'
+env:
+  - TOXENV=py35
+  - TOXENV=pep8
+before_install:
+  - pip install tox
+script:
+  - tox
+after_success:
+  - coveralls
+deploy:
+  provider: pypi
+  distributions: "sdist bdist_wheel"
+  user: <USER>
+  password:
+    secure: <PASSWORD>
+  on:
+    tags: true
+    repo: pyfa-org/eos
