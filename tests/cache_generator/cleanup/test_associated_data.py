@@ -223,9 +223,9 @@ class TestAssociatedData(GeneratorTestCase):
             'fittingUsageChanceAttributeID': None, 'preExpression': 101, 'postExpression': None,
             'durationAttributeID': None, 'dischargeAttributeID': None, 'rangeAttributeID': None,
             'falloffAttributeID': None, 'trackingSpeedAttributeID': None,
-            'modifierInfo': '- domain: shipID\n  func: LocationRequiredSkillModifier\n'
-                '  modifiedAttributeID: 1009\n  modifyingAttributeID: 1008\n  operator: 6\n'
-                '  skillTypeID: 3\n'
+            'modifierInfo':
+                '- domain: shipID\n  func: LocationRequiredSkillModifier\n  modifiedAttributeID: 1009\n'
+                '  modifyingAttributeID: 1008\n  operator: 6\n  skillTypeID: 3\n'
         })
         self.dh.data['dgmexpressions'].append({
             'expressionID': 101, 'operandID': 6, 'arg1': None, 'arg2': None,
