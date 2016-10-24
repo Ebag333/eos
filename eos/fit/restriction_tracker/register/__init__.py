@@ -37,7 +37,6 @@ from .state import StateRegister
 
 
 __all__ = [
-    'CapitalItemRegister',
     'ChargeGroupRegister',
     'ChargeSizeRegister',
     'ChargeVolumeRegister',

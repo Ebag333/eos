@@ -22,7 +22,7 @@
 from eos.const.eos import State
 from .exception import RegisterValidationError, ValidationError
 from .register import (
-    CapitalItemRegister, ChargeGroupRegister, ChargeSizeRegister, ChargeVolumeRegister, DroneGroupRegister,
+    ChargeGroupRegister, ChargeSizeRegister, ChargeVolumeRegister, DroneGroupRegister,
     HolderClassRegister, MaxGroupFittedRegister, MaxGroupOnlineRegister, MaxGroupActiveRegister, CpuRegister,
     PowerGridRegister, CalibrationRegister, DroneBayVolumeRegister, DroneBandwidthRegister, RigSizeRegister,
     ShipTypeGroupRegister, SkillRequirementRegister, SubsystemIndexRegister, ImplantIndexRegister,
@@ -67,7 +67,6 @@ class RestrictionTracker:
                 ImplantIndexRegister(),
                 BoosterIndexRegister(),
                 ShipTypeGroupRegister(fit),
-                CapitalItemRegister(fit),
                 MaxGroupFittedRegister(),
                 DroneGroupRegister(fit),
                 RigSizeRegister(fit),
