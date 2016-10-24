@@ -63,7 +63,10 @@ class Cleaner:
             Category.skill,
             Category.drone,
             Category.implant,
-            Category.subsystem
+            Category.subsystem,
+            Category.fighter,
+            Category.structure,
+            Category.structureModule
         )
         # Set with groupIDs of items we want to keep
         # It is set because we will need to modify it

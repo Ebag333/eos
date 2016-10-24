@@ -49,22 +49,37 @@ CLASS_VALIDATORS = {
         Attribute.implantness in item.attributes
     ),
     ModuleHigh: lambda item: (
-        item.category == Category.module and
+        (
+            item.category == Category.module or
+            item.category == Category.structureModule
+         ) and
         Slot.module_high in item.slots
     ),
     ModuleMed: lambda item: (
-        item.category == Category.module and
+        (
+            item.category == Category.module or
+            item.category == Category.structureModule
+         ) and
         Slot.module_med in item.slots
     ),
     ModuleLow: lambda item: (
-        item.category == Category.module and
+        (
+            item.category == Category.module or
+            item.category == Category.structureModule
+         ) and
         Slot.module_low in item.slots
     ),
     Rig: lambda item: (
-        item.category == Category.module and
+        (
+            item.category == Category.module or
+            item.category == Category.structureModule
+        ) and
         Slot.rig in item.slots
     ),
-    Ship: lambda item: item.category == Category.ship,
+    Ship: lambda item: (
+        item.category == Category.ship or
+        item.category == Category.structure
+    ),
     Skill: lambda item: item.category == Category.skill,
     Stance: lambda item: item.group == Group.ship_modifier,
     Subsystem: lambda item: (
