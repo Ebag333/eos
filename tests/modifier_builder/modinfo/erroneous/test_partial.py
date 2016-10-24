@@ -68,7 +68,7 @@ class TestBuilderModinfoErrorsPartial(ModBuilderTestCase):
         self.assertEqual(log_record.name, 'eos.data.cache_generator.modifier_builder.modifier_info.info2modifiers')
         self.assertEqual(log_record.levelno, logging.WARNING)
         expected = ('failed to build one of the modifiers of effect 1: unable to find '
-            'attribute groupID for filter value')
+                    'attribute groupID for filter value')
         self.assertEqual(log_record.msg, expected)
 
     def test_error_domain(self):
@@ -88,7 +88,7 @@ class TestBuilderModinfoErrorsPartial(ModBuilderTestCase):
         self.assertEqual(log_record.name, 'eos.data.cache_generator.modifier_builder.modifier_info.info2modifiers')
         self.assertEqual(log_record.levelno, logging.WARNING)
         expected = ('failed to build one of the modifiers of effect 58: unexpected domain targetID'
-            ' for filter function GangItemModifier')
+                    ' for filter function GangItemModifier')
         self.assertEqual(log_record.msg, expected)
 
     def test_error_operator(self):
