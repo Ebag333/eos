@@ -48,9 +48,9 @@ class Fit:
         # Ship-related containers
         self.subsystems = HolderSet(self, Subsystem)
         self.modules = ModuleRacks(
-            high=HolderList(self, ModuleHigh),
-            med=HolderList(self, ModuleMed),
-            low=HolderList(self, ModuleLow)
+            high=HolderList(self, AddModule),
+            med=HolderList(self, AddModule),
+            low=HolderList(self, AddModule)
         )
         self.rigs = HolderList(self, Rig)
         self.drones = HolderSet(self, Drone)

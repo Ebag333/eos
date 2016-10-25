@@ -26,9 +26,7 @@ __all__ = [
     'Drone',
     'EffectBeacon',
     'Implant',
-    'ModuleHigh',
-    'ModuleMed',
-    'ModuleLow',
+    'AddModule',
     'Rig',
     'Ship',
     'Skill',
@@ -43,7 +41,7 @@ from .charge import Charge
 from .drone import Drone
 from .effect_beacon import EffectBeacon
 from .implant import Implant
-from .module import ModuleHigh, ModuleMed, ModuleLow
+from .module import AddModule
 from .rig import Rig
 from .ship import Ship
 from .skill import Skill

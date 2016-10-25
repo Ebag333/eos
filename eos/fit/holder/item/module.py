@@ -48,49 +48,9 @@ class Module(MutableStateMixin, ChargeableMixin, DamageDealerMixin, DefaultEffec
         return make_repr_str(self, spec)
 
 
-class ModuleHigh(Module):
+class AddModule(Module):
     """
     Ship's module from high slot.
-
-    Required arguments:
-    type_id -- type ID of item which should serve as base
-    for this item.
-
-    Optional arguments:
-    state -- initial state this module takes, default is
-    offline
-    charge -- charge object to load into module, default
-    is None
-
-    Cooperative methods:
-    __init__
-    """
-    pass
-
-
-class ModuleMed(Module):
-    """
-    Ship's module from medium slot.
-
-    Required arguments:
-    type_id -- type ID of item which should serve as base
-    for this item.
-
-    Optional arguments:
-    state -- initial state this module takes, default is
-    offline
-    charge -- charge object to load into module, default
-    is None
-
-    Cooperative methods:
-    __init__
-    """
-    pass
-
-
-class ModuleLow(Module):
-    """
-    Ship's module from low slot.
 
     Required arguments:
     type_id -- type ID of item which should serve as base
