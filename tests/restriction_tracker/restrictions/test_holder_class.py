@@ -19,11 +19,11 @@
 # ===============================================================================
 
 
-from eos.const.eos import Restriction, Slot
+from eos.const.eos import Restriction, Slot, State, Domain
 from eos.const.eve import Attribute, Group, Category
 from eos.fit.holder.item import *
 from tests.restriction_tracker.restriction_testcase import RestrictionTestCase
-
+from unittest.mock import Mock
 
 class TestHolderClass(RestrictionTestCase):
     """Check functionality of holder class verification"""
@@ -201,7 +201,7 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_high_pass(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {Slot.module_high}
-        holder = ModuleHigh(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
@@ -213,12 +213,12 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_high_fail_category(self):
         item = self.ch.type_(type_id=1, category=1008)
         item.slots = {Slot.module_high}
-        holder = ModuleHigh(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleHigh)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
@@ -226,12 +226,13 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_high_fail_slot(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {1008}
-        holder = ModuleHigh(1)
+        item.effects = {13}
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleHigh)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
@@ -240,7 +241,7 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_medium_pass(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {Slot.module_med}
-        holder = ModuleMed(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
@@ -252,12 +253,12 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_med_fail_category(self):
         item = self.ch.type_(type_id=1, category=1008)
         item.slots = {Slot.module_med}
-        holder = ModuleMed(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleMed)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
@@ -265,12 +266,12 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_med_fail_slot(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {1008}
-        holder = ModuleMed(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleMed)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
@@ -279,7 +280,7 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_low_pass(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {Slot.module_low}
-        holder = ModuleLow(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
@@ -291,12 +292,12 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_low_fail_category(self):
         item = self.ch.type_(type_id=1, category=1008)
         item.slots = {Slot.module_low}
-        holder = ModuleLow(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleLow)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)
@@ -304,12 +305,12 @@ class TestHolderClass(RestrictionTestCase):
     def test_module_low_fail_slot(self):
         item = self.ch.type_(type_id=1, category=Category.module)
         item.slots = {1008}
-        holder = ModuleLow(1)
+        holder = Module(1)
         holder.item = item
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.holder_class)
         self.assertIsNotNone(restriction_error)
-        self.assertEqual(restriction_error.holder_class, ModuleLow)
+        self.assertEqual(restriction_error.holder_class, Module)
         self.assertEqual(len(restriction_error.expected_classes), 0)
         self.untrack_holder(holder)
         self.assertEqual(len(self.log), 0)

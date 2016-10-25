@@ -47,7 +47,10 @@ __all__ = [
     'TurretSlotRegister',
     'LauncherSlotRegister',
     'LaunchedDroneRegister',
-    'StateRegister'
+    'StateRegister',
+    'ModuleHighSlotRegister',
+    'ModuleMediumSlotRegister',
+    'ModuleLowSlotRegister',
 ]
 
 
@@ -66,3 +69,4 @@ from .slot_index import SubsystemIndexRegister, ImplantIndexRegister, BoosterInd
 from .slot_amount import (HighSlotRegister, MediumSlotRegister, LowSlotRegister, RigSlotRegister,
     SubsystemSlotRegister, TurretSlotRegister, LauncherSlotRegister, LaunchedDroneRegister)
 from .state import StateRegister
+from .module_slot import ModuleLowSlotRegister, ModuleMediumSlotRegister, ModuleHighSlotRegister
