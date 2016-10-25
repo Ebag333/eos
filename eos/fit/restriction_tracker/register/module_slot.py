@@ -21,11 +21,9 @@
 
 from collections import namedtuple
 
-from eos.const.eos import Restriction, Slot
-from eos.fit.holder.item import Drone
+from eos.const.eos import Restriction
 from eos.fit.restriction_tracker.exception import RegisterValidationError
 from .abc import RestrictionRegister
-
 
 ModuleSlotErrorData = namedtuple('ModuleSlotErrorData', ('module_slot', 'matching_slot'))
 
@@ -54,26 +52,23 @@ class ModuleSlotRegister(RestrictionRegister):
         tainted_holders = {}
         # Loop through the module registered to the slot
         for idx, module in enumerate(self._slot_consumers):
-            moduleID = module._type_id
-            hiPower = medPower = lowPower = False
+            hipower = medpower = lowpower = False
 
             # Loop through the effects on each module
             for effect in module.item.effects:
-                effectID = effect.id
-
-                if effect.id == 12 and self._ModuleSlotRegister__stat_name == 'high_slots': # hiPower Effect
-                    hiPower = True
+                if effect.id == 12 and self._ModuleSlotRegister__stat_name == 'high_slots':  # hiPower Effect
+                    hipower = True
                     break
-                elif effect.id == 13 and self._ModuleSlotRegister__stat_name == 'med_slots': # medPower Effect
-                    medPower = True
+                elif effect.id == 13 and self._ModuleSlotRegister__stat_name == 'med_slots':  # medPower Effect
+                    medpower = True
                     break
-                elif effect.id == 11 and self._ModuleSlotRegister__stat_name == 'low_slots': # lowPower Effect
-                    lowPower = True
+                elif effect.id == 11 and self._ModuleSlotRegister__stat_name == 'low_slots':  # lowPower Effect
+                    lowpower = True
                     break
 
             # Continue to the next module if we could not find a
             # matching slot and restriction type
-            if hiPower or medPower or lowPower:
+            if hipower or medpower or lowpower:
                 continue
             else:
                 tainted_holders[module] = ModuleSlotErrorData(
@@ -156,4 +151,3 @@ class ModuleLowSlotRegister(ModuleSlotRegister):
 
     def _get_tainted_holders(self, module_index):
         return self._fit.modules.low[module_index:]
-
