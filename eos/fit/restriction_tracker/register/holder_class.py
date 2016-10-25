@@ -45,7 +45,7 @@ CLASS_VALIDATORS = {
         item.category == Category.implant and
         Attribute.implantness in item.attributes
     ),
-    AddModule: lambda item: (
+    Module: lambda item: (
             item.category == Category.module or
             item.category == Category.structureModule
     ),

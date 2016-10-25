@@ -29,6 +29,22 @@ from eos.util.repr import make_repr_str
 
 
 class Module(MutableStateMixin, ChargeableMixin, DamageDealerMixin, DefaultEffectAttribMixin):
+    """
+    Ship's module from high/mid/low slot.
+
+    Required arguments:
+    type_id -- type ID of item which should serve as base
+    for this item.
+
+    Optional arguments:
+    state -- initial state this module takes, default is
+    offline
+    charge -- charge object to load into module, default
+    is None
+
+    Cooperative methods:
+    __init__
+    """
     def __init__(self, type_id, state=State.offline, charge=None, **kwargs):
         super().__init__(type_id=type_id, state=state, charge=charge, **kwargs)
 
@@ -46,23 +62,3 @@ class Module(MutableStateMixin, ChargeableMixin, DamageDealerMixin, DefaultEffec
     def __repr__(self):
         spec = [['type_id', '_type_id'], 'state', 'charge']
         return make_repr_str(self, spec)
-
-
-class AddModule(Module):
-    """
-    Ship's module from high slot.
-
-    Required arguments:
-    type_id -- type ID of item which should serve as base
-    for this item.
-
-    Optional arguments:
-    state -- initial state this module takes, default is
-    offline
-    charge -- charge object to load into module, default
-    is None
-
-    Cooperative methods:
-    __init__
-    """
-    pass
