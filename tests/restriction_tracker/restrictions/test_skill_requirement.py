@@ -22,7 +22,7 @@
 from unittest.mock import Mock
 
 from eos.const.eos import Domain, Restriction, State
-from eos.fit.holder.item import ModuleHigh, Rig, Skill
+from eos.fit.holder.item import Module, Rig, Skill
 from tests.restriction_tracker.restriction_testcase import RestrictionTestCase
 
 
@@ -34,7 +34,7 @@ class TestSkillRequirement(RestrictionTestCase):
         # is not met
         item = self.ch.type_(type_id=1)
         item.required_skills = {50: 3}
-        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=Module(1))
         self.track_holder(holder)
         restriction_error = self.get_restriction_error(holder, Restriction.skill_requirement)
         self.assertIsNotNone(restriction_error)
@@ -47,7 +47,7 @@ class TestSkillRequirement(RestrictionTestCase):
         # Check that multiple errors are shown as iterable
         item = self.ch.type_(type_id=1)
         item.required_skills = {48: 1, 50: 5}
-        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=Module(1))
         self.track_holder(holder)
         skill_item = self.ch.type_(type_id=50)
         skill_holder = Mock(state=State.offline, item=skill_item, _domain=Domain.character, spec_set=Skill(1))
@@ -67,7 +67,7 @@ class TestSkillRequirement(RestrictionTestCase):
         # up in error
         item = self.ch.type_(type_id=1)
         item.required_skills = {48: 1, 50: 5}
-        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=Module(1))
         self.track_holder(holder)
         skill_item = self.ch.type_(type_id=48)
         skill_holder = Mock(state=State.offline, item=skill_item, _domain=Domain.character, spec_set=Skill(1))
@@ -87,7 +87,7 @@ class TestSkillRequirement(RestrictionTestCase):
         # are met
         item = self.ch.type_(type_id=1)
         item.required_skills = {50: 3}
-        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=ModuleHigh(1))
+        holder = Mock(state=State.offline, item=item, _domain=Domain.ship, spec_set=Module(1))
         self.track_holder(holder)
         skill_item = self.ch.type_(type_id=50)
         skill_holder = Mock(state=State.offline, item=skill_item, _domain=Domain.character, spec_set=Skill(1))

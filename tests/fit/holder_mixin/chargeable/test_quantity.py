@@ -24,7 +24,7 @@ from unittest.mock import Mock
 from eos.const.eve import Attribute
 from eos.data.source import Source
 from eos.fit.holder.container import HolderSet
-from eos.fit.holder.item import ModuleHigh, Charge
+from eos.fit.holder.item import Module, Charge
 from tests.fit.fit_testcase import FitTestCase
 
 
@@ -32,7 +32,7 @@ class TestHolderMixinChargeQuantity(FitTestCase):
 
     def setUp(self):
         super().setUp()
-        self.holder = ModuleHigh(type_id=None)
+        self.holder = Module(type_id=None)
         self.holder.attributes = {}
         self.charge = Charge(type_id=None)
         self.charge.attributes = {}
@@ -40,7 +40,7 @@ class TestHolderMixinChargeQuantity(FitTestCase):
 
     def make_fit(self, *args, **kwargs):
         fit = super().make_fit(*args, **kwargs)
-        fit.container = HolderSet(fit, ModuleHigh)
+        fit.container = HolderSet(fit, Module)
         return fit
 
     def test_generic(self):

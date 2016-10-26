@@ -66,7 +66,10 @@ class RestrictionTracker:
                 SkillRequirementRegister(fit),
                 ChargeGroupRegister(),
                 ChargeSizeRegister(),
-                ChargeVolumeRegister()
+                ChargeVolumeRegister(),
+                ModuleHighSlotRegister(fit),
+                ModuleMediumSlotRegister(fit),
+                ModuleLowSlotRegister(fit),
             ),
             State.online: (
                 CpuRegister(fit),

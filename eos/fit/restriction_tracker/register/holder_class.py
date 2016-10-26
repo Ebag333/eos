@@ -45,26 +45,16 @@ CLASS_VALIDATORS = {
         item.category == Category.implant and
         Attribute.implantness in item.attributes
     ),
-    ModuleHigh: lambda item: (
+    Module: lambda item: (
         (
             item.category == Category.module or
             item.category == Category.structureModule
-         ) and
-        Slot.module_high in item.slots
-    ),
-    ModuleMed: lambda item: (
+        ) and
         (
-            item.category == Category.module or
-            item.category == Category.structureModule
-         ) and
-        Slot.module_med in item.slots
-    ),
-    ModuleLow: lambda item: (
-        (
-            item.category == Category.module or
-            item.category == Category.structureModule
-         ) and
-        Slot.module_low in item.slots
+            Slot.module_high in item.slots or
+            Slot.module_med in item.slots or
+            Slot.module_low in item.slots
+        )
     ),
     Rig: lambda item: (
         (

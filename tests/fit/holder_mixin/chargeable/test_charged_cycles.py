@@ -22,7 +22,7 @@
 from unittest.mock import Mock
 
 from eos.const.eve import Attribute, Effect
-from eos.fit.holder.item import ModuleHigh, Charge
+from eos.fit.holder.item import Module, Charge
 from tests.fit.fit_testcase import FitTestCase
 
 
@@ -30,7 +30,7 @@ class TestHolderMixinChargedCycles(FitTestCase):
 
     def setUp(self):
         super().setUp()
-        self.holder = ModuleHigh(type_id=None)
+        self.holder = Module(type_id=None)
         self.holder.item = Mock()
         self.holder.item.attributes = {}
         self.holder.attributes = {}

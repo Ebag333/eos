@@ -24,29 +24,29 @@ Currently you can use engine following way:
         fit.skills.add(Skill(skill_id, level=5))
 
     # 4x 800mm with hail
-    fit.modules.high.equip(ModuleHigh(2929, state=State.overload, charge=Charge(12779)))
-    fit.modules.high.equip(ModuleHigh(2929, state=State.overload, charge=Charge(12779)))
-    fit.modules.high.equip(ModuleHigh(2929, state=State.overload, charge=Charge(12779)))
-    fit.modules.high.equip(ModuleHigh(2929, state=State.overload, charge=Charge(12779)))
+    fit.modules.high.equip(Module(2929, state=State.overload, charge=Charge(12779)))
+    fit.modules.high.equip(Module(2929, state=State.overload, charge=Charge(12779)))
+    fit.modules.high.equip(Module(2929, state=State.overload, charge=Charge(12779)))
+    fit.modules.high.equip(Module(2929, state=State.overload, charge=Charge(12779)))
     # 4x Torp launcher with nova rages
-    fit.modules.high.equip(ModuleHigh(2420, state=State.overload, charge=Charge(24519)))
-    fit.modules.high.equip(ModuleHigh(2420, state=State.overload, charge=Charge(24519)))
-    fit.modules.high.equip(ModuleHigh(2420, state=State.overload, charge=Charge(24519)))
-    fit.modules.high.equip(ModuleHigh(2420, state=State.overload, charge=Charge(24519)))
+    fit.modules.high.equip(Module(2420, state=State.overload, charge=Charge(24519)))
+    fit.modules.high.equip(Module(2420, state=State.overload, charge=Charge(24519)))
+    fit.modules.high.equip(Module(2420, state=State.overload, charge=Charge(24519)))
+    fit.modules.high.equip(Module(2420, state=State.overload, charge=Charge(24519)))
 
-    fit.modules.med.equip(ModuleMed(5945, state=State.overload))  # Top named 100MN MWD
-    fit.modules.med.equip(ModuleMed(4833, state=State.active, charge=Charge(32014)))  # Named med cap injector with 800
-    fit.modules.med.equip(ModuleMed(9622, state=State.active))  # Named EM hardener
-    fit.modules.med.equip(ModuleMed(5443, state=State.active))  # Best named scram
-    fit.modules.med.equip(ModuleMed(2281, state=State.active))  # T2 invuln
+    fit.modules.med.equip(Module(5945, state=State.overload))  # Top named 100MN MWD
+    fit.modules.med.equip(Module(4833, state=State.active, charge=Charge(32014)))  # Named med cap injector with 800
+    fit.modules.med.equip(Module(9622, state=State.active))  # Named EM hardener
+    fit.modules.med.equip(Module(5443, state=State.active))  # Best named scram
+    fit.modules.med.equip(Module(2281, state=State.active))  # T2 invuln
 
-    fit.modules.low.equip(ModuleLow(2048, state=State.online))   # T2 DC
-    fit.modules.low.equip(ModuleLow(519, state=State.online))    # T2 gyrostab
-    fit.modules.low.equip(ModuleLow(519, state=State.online))    # T2 gyrostab
-    fit.modules.low.equip(ModuleLow(22291, state=State.online))  # T2 BCU
-    fit.modules.low.equip(ModuleLow(22291, state=State.online))  # T2 BCU
-    fit.modules.low.equip(ModuleLow(4405, state=State.online))   # T2 DDA
-    fit.modules.low.equip(ModuleLow(4405, state=State.online))   # T2 DDA
+    fit.modules.low.equip(Module(2048, state=State.online))   # T2 DC
+    fit.modules.low.equip(Module(519, state=State.online))    # T2 gyrostab
+    fit.modules.low.equip(Module(519, state=State.online))    # T2 gyrostab
+    fit.modules.low.equip(Module(22291, state=State.online))  # T2 BCU
+    fit.modules.low.equip(Module(22291, state=State.online))  # T2 BCU
+    fit.modules.low.equip(Module(4405, state=State.online))   # T2 DDA
+    fit.modules.low.equip(Module(4405, state=State.online))   # T2 DDA
 
     fit.rigs.equip(Rig(26082))  # T1 therm rig
     fit.rigs.equip(Rig(26088))  # T1 extender

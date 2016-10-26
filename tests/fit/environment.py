@@ -22,7 +22,7 @@
 from unittest.mock import Mock
 
 from eos.const.eos import State
-from eos.fit.holder.item import Charge, ModuleHigh
+from eos.fit.holder.item import Charge, Module
 from eos.fit.holder.mixin.state import MutableStateMixin
 from eos.util.volatile_cache import InheritableVolatileMixin
 
@@ -43,7 +43,7 @@ class OtherCachingHolder(MutableStateMixin, InheritableVolatileMixin):
         super().__init__(type_id=type_id, state=state, **kwargs)
 
 
-class CachingModule(ModuleHigh, InheritableVolatileMixin):
+class CachingModule(Module, InheritableVolatileMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
