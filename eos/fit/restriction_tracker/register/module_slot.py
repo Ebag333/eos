@@ -24,6 +24,7 @@ from collections import namedtuple
 from eos.const.eos import Restriction
 from eos.fit.restriction_tracker.exception import RegisterValidationError
 from .abc import RestrictionRegister
+from eos.const.eve import Effect
 
 ModuleSlotErrorData = namedtuple('ModuleSlotErrorData', ('module_slot', 'matching_slot'))
 
@@ -49,20 +50,21 @@ class ModuleSlotRegister(RestrictionRegister):
         self._slot_consumers.discard(holder)
 
     def validate(self):
+        stat_name = self.__stat_name
         tainted_holders = {}
         # Loop through the module registered to the slot
         for idx, module in enumerate(self._slot_consumers):
             hipower = medpower = lowpower = False
 
             # Loop through the effects on each module
-            for effect in module.item.effects:
-                if effect.id == 12 and self._ModuleSlotRegister__stat_name == 'high_slots':  # hiPower Effect
+            for module_effect in module.item.effects:
+                if module_effect.id == Effect.low_power and stat_name == 'high_slots':  # hiPower Effect
                     hipower = True
                     break
-                elif effect.id == 13 and self._ModuleSlotRegister__stat_name == 'med_slots':  # medPower Effect
+                elif module_effect.id == Effect.med_power and stat_name == 'med_slots':  # medPower Effect
                     medpower = True
                     break
-                elif effect.id == 11 and self._ModuleSlotRegister__stat_name == 'low_slots':  # lowPower Effect
+                elif module_effect.id == Effect.lo_power and stat_name == 'low_slots':  # lowPower Effect
                     lowpower = True
                     break
 
@@ -72,7 +74,7 @@ class ModuleSlotRegister(RestrictionRegister):
                 continue
             else:
                 tainted_holders[module] = ModuleSlotErrorData(
-                    module_slot=self._ModuleSlotRegister__stat_name,
+                    module_slot=stat_name,
                     matching_slot=False
                 )
 
