@@ -58,7 +58,7 @@ class ModuleSlotRegister(RestrictionRegister):
 
             # Loop through the effects on each module
             for module_effect in module.item.effects:
-                if module_effect.id == Effect.low_power and stat_name == 'high_slots':  # hiPower Effect
+                if module_effect.id == Effect.hi_power and stat_name == 'high_slots':  # hiPower Effect
                     hipower = True
                     break
                 elif module_effect.id == Effect.med_power and stat_name == 'med_slots':  # medPower Effect
