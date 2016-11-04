@@ -50,7 +50,7 @@ class SourceManager:
     default = None
 
     @classmethod
-    def add(cls, alias, data_handler, cache_handler, make_default=False):
+    def add(cls, alias, data_handler, cache_handler, make_default=False, skip_fingerprint=False):
         """
         Add source to source manager - this includes initializing
         all facilities hidden behind name 'source'. After source
@@ -71,24 +71,25 @@ class SourceManager:
         if alias in cls._sources:
             raise ExistingSourceError(alias)
 
-        # Compare fingerprints from data and cache
-        cache_fp = cache_handler.get_fingerprint()
-        data_version = data_handler.get_version()
-        current_fp = cls.__format_fingerprint(data_version)
+        if not skip_fingerprint:
+            # Compare fingerprints from data and cache
+            cache_fp = cache_handler.get_fingerprint()
+            data_version = data_handler.get_version()
+            current_fp = cls.__format_fingerprint(data_version)
 
-        # If data version is corrupt or fingerprints mismatch, update cache
-        if data_version is None or cache_fp != current_fp:
-            if data_version is None:
-                logger.info('data version is None, updating cache')
-            else:
-                msg = 'fingerprint mismatch: cache "{}", data "{}", updating cache'.format(
-                    cache_fp, current_fp)
-                logger.info(msg)
+            # If data version is corrupt or fingerprints mismatch, update cache
+            if data_version is None or cache_fp != current_fp:
+                if data_version is None:
+                    logger.info('data version is None, updating cache')
+                else:
+                    msg = 'fingerprint mismatch: cache "{}", data "{}", updating cache'.format(
+                        cache_fp, current_fp)
+                    logger.info(msg)
 
-            # Generate cache, apply customizations and write it
-            cache_data = CacheGenerator().run(data_handler)
-            CacheCustomizer().run_builtin(cache_data)
-            cache_handler.update_cache(cache_data, current_fp)
+                # Generate cache, apply customizations and write it
+                cache_data = CacheGenerator().run(data_handler)
+                CacheCustomizer().run_builtin(cache_data)
+                cache_handler.update_cache(cache_data, current_fp)
 
         # Finally, add record to list of sources
         source = Source(alias=alias, cache_handler=cache_handler)
